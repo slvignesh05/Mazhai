@@ -1,0 +1,26 @@
+name: Secure Artifact Download Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  secure-download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Download artifact (simulated release)
+        run: |
+          curl -L -o demo_script.sh https://example.com/artifacts/demo_script.sh
+          curl -L -o demo_script.sh.sha256 https://example.com/artifacts/demo_script.sh.sha256
+
+      - name: Verify SHA256 checksum
+        run: |
+          echo "🔍 Verifying artifact integrity..."
+          sha256sum -c demo_script.sh.sha256
+
+      - name: Execute only if verified
+        run: |
+          echo "✅ Hash verified. Running script safely..."
+          bash demo_script.sh
