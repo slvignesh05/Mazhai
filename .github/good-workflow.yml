@@ -17,10 +17,10 @@ jobs:
 
       - name: Verify SHA256 checksum
         run: |
-          echo "🔍 Verifying artifact integrity..."
+          echo "Verifying artifact integrity..."
           sha256sum -c demo_script.sh.sha256
 
       - name: Execute only if verified
         run: |
-          echo "✅ Hash verified. Running script safely..."
+          echo "Hash verified. Running script safely..."
           bash demo_script.sh
